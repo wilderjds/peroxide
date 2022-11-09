@@ -1,0 +1,19 @@
+#!/sbin/openrc-run
+# Copyright 1999-2020 Gentoo Authors
+# Distributed under the terms of the GNU General Public License v2
+
+CFGFILE="/etc/peroxide/peroxide.conf"
+
+depend() {
+    need net
+}
+
+description="Peroxide is a proton-mail brigde alternative"
+command=/usr/sbin/peroxide
+command_user="peroxide:peroxide"
+command_args="-config ${CFGFILE}"
+command_background="yes"
+output_log="/var/log/peroxide/peroxide.log"
+error_log="/var/log/peroxide/peroxide.log"
+required_files=${CFGFILE}
+pidfile="/var/run/peroxide.pid"

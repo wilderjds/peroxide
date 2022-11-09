@@ -39,9 +39,9 @@ if [ ! -d /etc/peroxide ]; then
     chmod 700 /etc/peroxide
 fi
 
-#if [ ! -f /etc/systemd/system/peroxide.service ]; then
-#    cp peroxide.service /etc/systemd/system/peroxide.service
-#    systemctl daemon-reload
+if [ ! -f /etc/init.d/peroxide ]; then
+    cp peroxide.rc-init /etc/init.d/peroxide
+    rc-update add peroxide default
 #fi
 
 if [ ! -d /var/log/peroxide ]; then
@@ -52,5 +52,5 @@ fi
 
 if [ -d /etc/logrotate.d ] && [ ! -f /etc/logrotate.d/peroxide ]; then
     cp peroxide.logrotate /etc/logrotate.d/peroxide
-    # systemctl restart logrotate
+    rc-service logrotate restart
 fi
